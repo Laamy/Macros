@@ -15,7 +15,7 @@ __int64 SplashTextRenderDetour(
     __int64 _this,
     __int64 ctx,
     __int64 ci,
-    UIControl* control,
+    void* controlPtr,
     __int64 a5,
     __int64 rect
 )
@@ -26,15 +26,17 @@ __int64 SplashTextRenderDetour(
 
     //return 3.141; // idk lol
 
-    control->Opacity(3.141);
-    std::cout << control->Opacity() << std::endl;
+    UIControl control(controlPtr);
 
-    return CallFunc<__int64, __int64, __int64, __int64, UIControl*, __int64, __int64>(
+    control.Opacity = 0.5f;
+    control.Position = Vector2<float>(10, 10);
+
+    return CallFunc<__int64, __int64, __int64, __int64, void*, __int64, __int64>(
         __o__DrawSplash,
         _this,
         ctx,
         ci,
-        control,
+        controlPtr,
         a5,
         rect
     );
